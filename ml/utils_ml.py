@@ -88,7 +88,7 @@ def train_pre(model, train_x, test_x, train_y, test_y):
 
 ###可视化,参考https://blog.csdn.net/Monk_donot_know/article/details/86614558
 def classification_result(confusion_matrix, cm_type, train_result, test_result,
-                          model_name):
+                          model_name,result_path):
     """对训练结果进行分析输出和保存
 
     Args:
@@ -96,12 +96,14 @@ def classification_result(confusion_matrix, cm_type, train_result, test_result,
         cm_type (list): 混淆矩阵的类型，是训练的结果还是测试的结果
         train_result (tuple): 训练模型之后对训练集的预测结果和真实结果
         test_result (tuple): 训练模型之后对测试集的预测结果和真实结果
+        result_path(list):结果保存路径
     """
     #解释一下参数的具体内容
     # confusion_matrix = (train_matrix,test_matrix)
     # cm_type = ['train_result','test_result']
     # train_result = (train_y, pred_train,pred_prob_train)
     # test_result = (test_y,pred_test,preed_prob_test)
+    # result_path = ['train_res','test_res']
     # 以下我自己知道实现的比较复杂，可以直接一个if，else解决，但是我觉得这样更加直观。
     for index, cm in enumerate(confusion_matrix):
         cm_info = OrderedDict()

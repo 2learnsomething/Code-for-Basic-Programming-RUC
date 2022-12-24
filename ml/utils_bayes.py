@@ -5,13 +5,6 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score, roc_curve, auc
 from collections import OrderedDict
 
-#训练结果保存
-train_path = '/new_python_for_gnn/毕设code/technical_model_result/train'
-#测试结果保存
-test_path = '/new_python_for_gnn/毕设code/technical_model_result/test'
-#保存路径
-result_path = [train_path, test_path]
-
 
 def process_x(processing_type, x):
     """对x数据进行归一化
@@ -50,8 +43,6 @@ def train_pre(model, train_x, test_x, train_y, test_y):
     model.fit(train_x, train_y)
 
     is_pred_prob = hasattr(model, 'predict_prob')  #判断是否有预测分类概率的函数
-    #注下面的特征重要性似乎只是随机森林算法才有，其他模型没有，这个需要注意
-    #print('特征的重要性:{}'.format(model.best_estimator_.feature_importance_))
 
     pred_train = model.predict(train_x)  # 获取标签
     accuracy1 = accuracy_score(train_y, pred_train)

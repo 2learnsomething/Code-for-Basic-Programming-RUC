@@ -3,14 +3,10 @@ import sys
 
 sys.path.append('.')
 import numpy as np
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import BernoulliNB
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from utils_bayes import train_pre, classification_result, plot_ROC
-
-
-#将roc曲线保存的路径
-figure_path = '/new_python_for_gnn/毕设code/technical_model_result/figure'
 
 
 #获取数据
@@ -26,7 +22,7 @@ def get_x_y_data():
     Returns:
         ndarray: 划分好的训练集和测试集的元组
     """
-    #由于第一个实现的是decision——tree,已经保存了相关的数据文件，所以这里直接读取，就可以节省数据concanate的时间
+    #这个地方后续需要修改，先改整体逻辑
     x = np.load('/new_python_for_gnn/毕设code/technical_analysis/x_data.npy')
     y = np.load('/new_python_for_gnn/毕设code/technical_analysis/y_data.npy')
 
@@ -45,18 +41,16 @@ def model_design():
     Returns:
         model : 模型
     """
-    gn = GaussianNB() #实例化
+    parameters = {'binarize': [0.001, 0.01, 0.1, 1]}
+    bn = BernoulliNB() #实例化
+    model = GridSearchCV(bn, parameters, refit = True, cv = 10, verbose = 1, n_jobs = -1)
     # 进行预测
-    return gn
+    return model
 
 
 def main():
     cm_type = ['train_result', 'test_result']
-    #确定公司代码
-    #print('确定公司ing...')
-    #company_list = new_left_company(company_final)
-    #company_list = list(map(lambda x: x.replace('.csv', ''), company_list))
-    #company_use = choice(company_list)
+    figure_path = 'res\fig'
     #获取数据集
     print('获取数据ing...')
     train_x, test_x, train_y, test_y = get_x_y_data()
