@@ -8,16 +8,7 @@ from sklearn.model_selection import train_test_split
 import sys
 
 sys.path.append(".")
-from preprocessing.price_preprocess import single_company_price_2tag, new_left_company, missing_fulfill, get_trade_day
 from utils_ml import process_x, train_pre, classification_result, plot_ROC
-
-#储存最后使用的公司的路径
-company_final = 'D:\毕设code\\news_data_from2016to2021\companies\\final_use'
-#交易日数据
-trade_cal = 'D:\毕设code\\news_data_from2016to2021\companies\\trade_cal_clean.csv'
-#将roc曲线保存的路径
-figure_path = 'D:\毕设code\\technical_model_result\\figure'
-
 
 ###基于历史数据进行预测,先获得数据集,以下都是基于已经确定了特征之后的处理
 def single_company_data(company_code, path, columns):
