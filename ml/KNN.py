@@ -8,11 +8,6 @@ from sklearn.model_selection import GridSearchCV
 from utils_ml import process_x, train_pre, classification_result, plot_ROC
 
 
-#交易日数据
-trade_cal = '/new_python_for_gnn/毕设code/news_data_from2016to2021/companies/trade_cal_clean.csv'
-#将roc曲线保存的路径
-figure_path = '/new_python_for_gnn/毕设code/technical_model_result/figure'
-
 #获取数据
 def get_x_y_data():
     """返回划分好的训练集和测试集,目前不考虑验证集(validation set)
