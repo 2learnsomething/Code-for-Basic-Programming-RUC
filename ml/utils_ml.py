@@ -129,7 +129,7 @@ class tools():
         precision_score_average_micro = precision_score(true_lable, prediction, average='micro')
         precision_score_average_macro = precision_score(true_lable, prediction, average='macro')
         precision_score_average_weighted = precision_score(true_lable, prediction, average='weighted')
-        cm_info['precision_score_average_None'] = precision_score_average_None
+        cm_info['precision_score_average_None'] = precision_score_average_None.tolist()
         cm_info['precision_score_average_micro'] = precision_score_average_micro
         cm_info['precision_score_average_macro'] = precision_score_average_macro
         cm_info['precision_score_average_weighted'] = precision_score_average_weighted
@@ -143,7 +143,7 @@ class tools():
         recall_score_average_micro = recall_score(true_lable, prediction, average='micro')
         recall_score_average_macro = recall_score(true_lable, prediction, average='macro')
         recall_score_average_weighted = recall_score(true_lable, prediction, average='weighted')
-        cm_info['recall_score_average_None'] = recall_score_average_None
+        cm_info['recall_score_average_None'] = recall_score_average_None.tolist()
         cm_info['recall_score_average_micro'] =recall_score_average_micro
         cm_info['recall_score_average_macro'] =recall_score_average_macro
         cm_info['recall_score_average_weighted'] = recall_score_average_weighted
@@ -157,7 +157,7 @@ class tools():
         f1_score_average_micro = f1_score(true_lable, prediction, average='micro')
         f1_score_average_macro = f1_score(true_lable, prediction, average='macro')
         f1_score_average_weighted = f1_score(true_lable, prediction, average='weighted')
-        cm_info['f1_score_average_None'] = f1_score_average_None
+        cm_info['f1_score_average_None'] = f1_score_average_None.tolist()
         cm_info['f1_score_average_micro'] =f1_score_average_micro
         cm_info['f1_score_average_macro'] =f1_score_average_macro
         cm_info['f1_score_average_weighted'] =f1_score_average_weighted
