@@ -6,7 +6,7 @@ from sklearn.model_selection import GridSearchCV
 import sys
 
 sys.path.append(".")
-from utils_ml import train_pre
+from utils_all import train_pre,get_x_y_data
 
 ###准备模型
 def model_design():

@@ -11,6 +11,8 @@ from sklearn.metrics import (
     roc_curve,
     auc,
 )
+import sys 
+sys.path.append('..')
 from collections import OrderedDict
 from sklearn.model_selection import train_test_split
 
@@ -37,6 +39,8 @@ def process_x(processing_type, x):
 
         ma = MaxAbsScaler()
         x = ma.fit_transform(x)
+    else:
+        x = x.apply(lambda x:x/eval(processing_type)).values #缩放
     return x
 
 
@@ -47,7 +51,7 @@ def get_x_y_data():
         _type_: _description_
     """
     x = np.load("data/x_data.npy")
-    y = np.load("data/y_data.npy")
+    y = np.load("data/y_data.npy",allow_pickle=True)
 
     train_x, test_x, train_y, test_y = train_test_split(
         x, y, test_size=0.2, shuffle=True, random_state=20221224
@@ -204,3 +208,18 @@ def plot_ROC(labels, preds, savepath):
     plt.legend(loc="lower right")
     plt.show()
     plt.savefig(savepath)  # 保存文件
+
+
+if __name__ == '__main__':
+    train_x, test_x, train_y, test_y = get_x_y_data()
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.model_selection import GridSearchCV
+    dt = DecisionTreeClassifier()
+    param_grid = {
+        'max_depth': np.arange(29, 40),
+        'min_samples_leaf': np.arange(1, 8), #1
+        'min_samples_split': np.arange(2, 8) #3
+    }
+    #设置10折进行交叉验证
+    model = GridSearchCV(dt, param_grid, cv=10, verbose=2, n_jobs=-1)
+    train_pre(model,train_x, test_x, train_y, test_y)
