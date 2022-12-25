@@ -1,14 +1,6 @@
-from turtle import color
 import matplotlib.pyplot as plt
 import os
-import sys
 import json
-
-sys.path.append('.')
-from preprocessing.price_preprocess import new_left_company
-from utils import path
-
-path = path.rsplit('\\', 1)[0]
 
 
 def get_result(train_or_test='test', data_type='precision'):
@@ -21,34 +13,7 @@ def get_result(train_or_test='test', data_type='precision'):
     Returns:
         tuple: 模型名称和数据
     """
-    if train_or_test == 'train':
-        result_list = new_left_company(
-            os.path.join(path, 'technical_model_result', train_or_test))
-        result_list.remove('Bayes_train_result_2tag.json')
-        model_name = list(
-            map(lambda x: x.replace('_train_result_2tag.json', ''),
-                result_list))  #获取模型的名称
-        data_list = []
-        for file_name in result_list:
-            with open(file_name, 'r') as f:
-                cont = json.load(f)
-            data_list.append(cont[data_type])
-        return model_name, data_list
-    else:
-        result_list = new_left_company(
-            os.path.join(path, 'technical_model_result', train_or_test))
-        result_list.remove('Bayes_test_result_2tag.json')
-        model_name = list(
-            map(lambda x: x.replace('_test_result_2tag.json', ''),
-                result_list))
-        data_list = []
-        for file_name in result_list:
-            with open(
-                    os.path.join(path, 'technical_model_result', train_or_test,
-                                 file_name), 'r') as f:
-                cont = json.load(f)
-            data_list.append(cont[data_type])
-        return model_name, data_list
+    pass
 
 
 def name_tran(data_type):
@@ -92,18 +57,13 @@ def vis_data(model_name, data_list, data_type):
     for name, data in zip(model_name, data_list):
         plt.text(name, data, round(data, 2), color='blue', fontsize=8)
     #plt.show()
-    plt.savefig(os.path.join(path, 'figure', data_type + '.pdf'))
+    plt.savefig(os.path.join('res\fig', data_type + '.pdf'))
     print('保存图片成功')
 
 
 def main():
     train_or_test = 'test'
-    data_type_list = ['precision', 'accuracy', 'recall', 'f1', 'TNR', 'FPR']
-    for data_type in data_type_list:
-        #print(data_type)
-        model_name, data_list = get_result(train_or_test, data_type)
-        #print(model_name,data_list)
-        vis_data(model_name, data_list, data_type)
+    data_type_list = ['precision', 'accuracy', 'recall', 'f1']
 
 
 if __name__ == '__main__':
