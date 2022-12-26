@@ -11,22 +11,22 @@ def model_design():
     Returns:
         model : 模型
     """
-    rf = RandomForestClassifier(n_estimators=140,
-                                criterion='gini',
-                                max_depth=20,
+    rf = RandomForestClassifier(criterion='entropy',
+                                n_estimators=55,
+                                max_depth=15,
                                 min_samples_split=6,
-                                min_samples_leaf=1,
+                                min_samples_leaf=3,
                                 random_state=1234,
                                 n_jobs=-1)  #实例化
     #参数设置
 
     param_grid = {
-        #'n_estimators': np.arange(120, 160, 10),
-        #'criterion': ['gini','entropy']
-        #'max_depth': np.arange(17, 30, 3),
-        #'min_samples_split': np.arange(2, 16, 2),
-        #'min_samples_leaf': np.arange(1, 15, 2),
-        'max_features': np.arange(0.1, 1.1, 0.3)
+        # 'n_estimators': np.arange(40, 60, 5),
+        # 'criterion': ['gini','entropy'],
+        # 'max_depth': np.arange(6, 18, 3),
+        # 'min_samples_split': np.arange(4, 10, 2),
+        # 'min_samples_leaf': np.arange(1, 15, 2),
+        'max_features': np.arange(0.5, 1.0, 0.1)
     }
 
     #设置10折进行交叉验证

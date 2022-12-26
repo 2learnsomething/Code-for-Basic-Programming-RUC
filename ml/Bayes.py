@@ -2,7 +2,8 @@ import numpy as np
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.model_selection import GridSearchCV
 from utils_ml import tools
-
+import warnings
+warnings.filterwarnings('ignore')
 
 ###准备模型
 def model_design():

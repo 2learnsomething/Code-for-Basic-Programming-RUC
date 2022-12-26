@@ -11,14 +11,11 @@ def model_design():
     Returns:
         model : 模型
     """
-    decisiontree = DecisionTreeClassifier(min_samples_leaf=1,
-                                          min_samples_split=3,
-                                          random_state=1234)  #实例化
+    decisiontree = DecisionTreeClassifier(min_samples_split=1,random_state=1234)  #实例化
     #参数设置
     param_grid = {
-        'max_depth': np.arange(29, 40),
-        'min_samples_leaf': np.arange(1, 8),  #1
-        'min_samples_split': np.arange(2, 8)  #3
+        'max_depth': np.arange(1, 15),
+        'min_samples_leaf': np.arange(10, 20),  #1
     }
     #设置10折进行交叉验证
     model = GridSearchCV(decisiontree, param_grid, cv=10, verbose=2, n_jobs=-1)

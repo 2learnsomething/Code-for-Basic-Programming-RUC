@@ -10,16 +10,18 @@ def model_design():
     Returns:
         model : 模型
     """
-    gbdt = GradientBoostingClassifier(n_estimators=150,
-                                      max_depth=8,
-                                      min_samples_split=80)  #实例化
+    gbdt = GradientBoostingClassifier(n_estimators=50,
+                                      max_depth=6,
+                                      min_samples_split=50,
+                                      min_samples_leaf=60,
+                                      subsample=0.85)  #实例化
     #参数设置
     param_grid = {
-        #'n_estimators':range(130,171,10), #170
-        #'max_depth':range(2,13,2), # 12
-        #'min_samples_split':range(10,191,20),
-        'min_samples_leaf': range(10, 101, 10),  #60
-        'subsample': [0.6, 0.7, 0.75, 0.8, 0.85, 0.9]  #忘记记了，假设0.85
+        # 'n_estimators':range(10,81,10), 
+        # 'max_depth':range(2,13,2), 
+        # 'min_samples_split':range(10,111,20),
+        # 'min_samples_leaf': range(10, 71, 10),  
+        'subsample': [0.6, 0.7, 0.75, 0.8, 0.85, 0.9]  
     }
 
     #设置10折进行交叉验证
